@@ -1,6 +1,8 @@
 import { NextPage } from 'next';
+import Head from 'next/head';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
+
 import { CreateTask, Task } from '../../models/task.model';
 import { fetchOneTask, updateTask } from '../../features/task/TaskAPI';
 import TaskForm from '../../features/task/task-form/TaskForm';
@@ -33,8 +35,11 @@ const EditTask: NextPage = () => {
 
   return (
     <div className="p-4">
+      <Head>
+        <title>Edit Task</title>
+      </Head>
       <div className='m-auto' style={{ width: 'min(600px, 100%)' }}>
-        <h2 className='text-xl font-bold mb-4'>EditTask</h2>
+        <h2 className='text-xl font-bold mb-4'>Edit Task</h2>
         <TaskForm onSave={onSave} onCancel={onCancel} task={task}></TaskForm>
       </div>
     </div>

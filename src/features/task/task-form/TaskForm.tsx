@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
+
 import { CreateTask, Task } from "../../../models/task.model"
 import { Button } from "../../../shared/button/Button"
-import Head from "next/head"
 import { Input } from "../../../shared/input/Input"
 import { Textarea } from "../../../shared/textarea/Textarea"
 
@@ -37,9 +37,6 @@ const TaskForm = ({ task, onSave, onCancel }: Props) => {
 
     return (
         <div>
-            <Head>
-                <title>New Task</title>
-            </Head>
             <form onSubmit={onSubmit} className="flex flex-col gap-4">
                 <div className="flex flex-col">
                     <label htmlFor="name">Name</label>
