@@ -18,3 +18,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
+input:focus-visible, textarea:focus-visible {
+  outline: none;
+}
