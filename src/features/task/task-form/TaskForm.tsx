@@ -63,9 +63,15 @@ const TaskForm = ({ task, onSave, onCancel }: Props) => {
                         className="h-4 w-4 focus:ring-indigo-500" />
                     <label htmlFor="is-complete" className="font-semibold">Complete</label>
                 </div>
-                <div className="flex justify-end gap-2">
-                    <Button onClick={onCancel} severity="plain">Cancel</Button>
-                    <Button type="submit" disabled={!name || !description || !author}>Save</Button>
+                <div className="flex justify-end gap-2 w-full fixed md:relative bottom-0 left-0 p-2">
+                    <Button onClick={onCancel} severity="plain"
+                        className="w-full md:w-auto">
+                        Cancel
+                    </Button>
+                    <Button type="submit" disabled={!name || !description || !author}
+                        className="w-full md:w-auto">
+                        Save
+                    </Button>
                 </div>
             </form>
         </div>

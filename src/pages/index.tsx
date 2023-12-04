@@ -67,9 +67,11 @@ const IndexPage: NextPage = () => {
       </Head>
       <div className='m-auto' style={{width: 'min(600px, 100%)'}}>
         <div className='flex justify-end pb-4'>
-          <Link href={'/task'}>
-            <Button>New task</Button>
-          </Link>
+          <Button className='w-full md:w-auto'>
+            <Link href={'/task'}>
+              New task
+            </Link>
+          </Button>
         </div>
         <TaskList tasks={tasks} onDeleteTask={onDeleteTask}
           onTaskClick={onTaskClick} onToggleTaskComplete={onToggleTaskComplete}></TaskList>

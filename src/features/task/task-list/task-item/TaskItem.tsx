@@ -27,11 +27,13 @@ export const TaskItem = ({ task, onDelete, onTaskClick, onToggleTaskComplete }: 
                         className='w-5 h-5' />
                 </div>
                 <div className='flex-1 p-4 cursor-pointer' onClick={onTaskClick}>
-                    <p className='text-lg font-bold'>
+                    <p className='text-lg font-bold flex flex-wrap items-center gap-x-2'>
                         <span className={isComplete ? 'line-through text-slate-600' : ''}>{task.name}</span>
-                        <span className='ml-2 text-slate-700 text-sm'>({task.author})</span>
                     </p>
-                    <p className='text-sm text-slate-500 mb-1'>{task.createdAt.toDateString()}</p>
+                    <p className='text-sm text-slate-500 mb-1'>
+                        <span className='text-slate-500 text-sm font-semibold'>{task.author}, </span>
+                        <span>{task.createdAt.toLocaleDateString('en-GB')}</span>
+                    </p>
                     <p>
                         <span className={isComplete ? 'text-slate-400' : ''}>{task.description}</span>
                     </p>
