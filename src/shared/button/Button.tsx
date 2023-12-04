@@ -14,8 +14,11 @@ const severityClassMap: {
   danger: 'bg-red-500 text-white'
 }
 export const Button = ({ severity = 'primary', children, ...attributes }: Props) => {
+  const baseClasses = `${severityClassMap[severity]} p-2 px-3 rounded-md`
+  attributes.className = `${baseClasses} ${attributes.className}`
+
   return (
-    <button type='button' className={`${severityClassMap[severity]} p-2 px-3 rounded-md`} {...attributes}>
+    <button type='button' {...attributes}>
         {children}
     </button>
   )
