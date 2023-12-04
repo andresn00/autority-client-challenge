@@ -14,3 +14,14 @@ export const fetchAllTasks = async (): Promise<Task[]> => {
     const result = await response.json() as ResponseWrapper<Task[]>
     return result.data
 }
+
+export const deleteTask = async (id: number) => {
+    const response = await fetch(`${url}/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    const result = await response.json() as ResponseWrapper<Task>
+    return result.data
+}

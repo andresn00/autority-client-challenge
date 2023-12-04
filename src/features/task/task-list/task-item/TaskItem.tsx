@@ -4,18 +4,16 @@ import { FaEllipsisVertical, FaRegTrashCan } from "react-icons/fa6";
 
 
 type Props = {
-    task: Task
+    task: Task,
+    onDelete: () => void
 }
 
-export const TaskItem = ({ task }: Props) => {
+export const TaskItem = ({ task, onDelete }: Props) => {
     const [isComplete, setIsComplete] = useState<boolean>(task.isComplete)
     const [showDeleteBtn, setShowDeleteBtn] = useState<boolean>(false)
 
     const onIsCompleteChange = () => {
         setIsComplete(!isComplete)
-    }
-
-    const onDelete = () => {
     }
 
     return (
