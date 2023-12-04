@@ -12,7 +12,7 @@ export const fetchAllTasks = async (): Promise<Task[]> => {
         },
     })
     const result = await response.json() as ResponseWrapper<Task[]>
-    return result.data
+    return parseDatesForTaskList(result.data)
 }
 
 export const fetchOneTask = async (id: number): Promise<Task> => {
@@ -23,7 +23,7 @@ export const fetchOneTask = async (id: number): Promise<Task> => {
         },
     })
     const result = await response.json() as ResponseWrapper<Task>
-    return result.data
+    return parseDatesForTask(result.data)
 }
 
 export const deleteTask = async (id: number) => {
@@ -34,7 +34,7 @@ export const deleteTask = async (id: number) => {
         },
     })
     const result = await response.json() as ResponseWrapper<Task>
-    return result.data
+    return parseDatesForTask(result.data)
 }
 
 export const createTask = async (task: CreateTask) => {
@@ -46,7 +46,7 @@ export const createTask = async (task: CreateTask) => {
         body: JSON.stringify(task)
     })
     const result = await response.json() as ResponseWrapper<Task>
-    return result.data
+    return parseDatesForTask(result.data)
 }
 
 export const updateTask = async (id: number, task: CreateTask) => {
@@ -58,7 +58,7 @@ export const updateTask = async (id: number, task: CreateTask) => {
         body: JSON.stringify(task)
     })
     const result = await response.json() as ResponseWrapper<Task>
-    return result.data
+    return parseDatesForTask(result.data)
 }
 
 export const toggleTaskComplete = async (id: number) => {
@@ -69,5 +69,19 @@ export const toggleTaskComplete = async (id: number) => {
         },
     })
     const result = await response.json() as ResponseWrapper<Task>
-    return result.data
+    return parseDatesForTask(result.data)
+}
+
+const parseDatesForTaskList = (tasks: Task[]): Task[] => {
+    return tasks.map(task => parseDatesForTask(task))
+}
+
+const parseDatesForTask = (task: Task): Task => {
+    const taskParsed: Task = {
+        ...task,
+        createdAt: new Date(task.createdAt),
+        updatedAt: new Date(task.updatedAt),
+        deletedAt: task.deletedAt && new Date(task.deletedAt),
+    }
+    return taskParsed
 }
