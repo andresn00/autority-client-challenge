@@ -4,14 +4,13 @@ import Head from 'next/head'
 import { Task } from '../models/task.model'
 
 import TaskList from '../features/task/task-list/TaskList'
-import { fetchAllTasks, deleteTask } from '../features/task/TaskAPI'
+import { fetchAllTasks, deleteTask, toggleTaskComplete } from '../features/task/TaskAPI'
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Button } from '../shared/button/Button'
 import ConfirmationModal from '../shared/confirmation-modal/ConfirmationModal'
 import { useRouter } from 'next/router'
-import { url } from 'inspector'
 
 
 const IndexPage: NextPage = () => {
@@ -53,6 +52,13 @@ const IndexPage: NextPage = () => {
     const url = '/task/[id]'
     router.push({ pathname: url, query: { id } })
   }
+
+  const onToggleTaskComplete = (id: number) => {
+    toggleTaskComplete(id).then((taskUpdated) => {
+      const newTasks = tasks.filter(t => t.id !== id)
+      setTasks([...newTasks, taskUpdated])
+    })
+  }
   
   return (
     <div className='p-4'>
@@ -60,13 +66,13 @@ const IndexPage: NextPage = () => {
         <title>Autority Challenge</title>
       </Head>
       <div className='m-auto' style={{width: 'min(600px, 100%)'}}>
-        <div className='flex justify-end pb-2'>
+        <div className='flex justify-end pb-4'>
           <Link href={'/task'}>
             <Button>New task</Button>
           </Link>
         </div>
         <TaskList tasks={tasks} onDeleteTask={onDeleteTask}
-          onTaskClick={onTaskClick} ></TaskList>
+          onTaskClick={onTaskClick} onToggleTaskComplete={onToggleTaskComplete}></TaskList>
         <ConfirmationModal isOpen={confirmationModalOpen} onClose={(value) => handleCloseModal(value)}
           danger={true} title='Delete task'
           description='Are you sure you want to delete this task?' />

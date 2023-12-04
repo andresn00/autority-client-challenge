@@ -60,3 +60,14 @@ export const updateTask = async (id: number, task: CreateTask) => {
     const result = await response.json() as ResponseWrapper<Task>
     return result.data
 }
+
+export const toggleTaskComplete = async (id: number) => {
+    const response = await fetch(`${url}/toggle-complete/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    const result = await response.json() as ResponseWrapper<Task>
+    return result.data
+}
