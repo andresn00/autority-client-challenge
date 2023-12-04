@@ -31,6 +31,7 @@ export const TaskItem = ({ task, onDelete, onTaskClick, onToggleTaskComplete }: 
                         <span className={isComplete ? 'line-through text-slate-600' : ''}>{task.name}</span>
                         <span className='ml-2 text-slate-700 text-sm'>({task.author})</span>
                     </p>
+                    <p className='text-sm text-slate-500 mb-1'>{task.createdAt.toDateString()}</p>
                     <p>
                         <span className={isComplete ? 'text-slate-400' : ''}>{task.description}</span>
                     </p>
