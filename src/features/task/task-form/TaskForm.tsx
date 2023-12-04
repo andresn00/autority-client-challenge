@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { CreateTask, Task } from "../../../models/task.model"
 import { Button } from "../../../shared/button/Button"
 import Head from "next/head"
@@ -16,8 +16,16 @@ const TaskForm = ({ task, onSave, onCancel }: Props) => {
     const [author, setAuthor] = useState<string>(task?.author || '')
     const [isComplete, setIsComplete] = useState<boolean>(task?.isComplete || false)
 
+    useEffect(() => {
+        setName(task?.name || '')
+        setDescription(task?.description || '')
+        setAuthor(task?.author || '')
+        setIsComplete(task?.isComplete || false)
+    }, [task])
+    
     const onSubmit = (e) => {
         e.preventDefault()
+        if (!name || !description || !author) return
         const task: CreateTask = {
             name,
             description,
@@ -57,7 +65,7 @@ const TaskForm = ({ task, onSave, onCancel }: Props) => {
                 </div>
                 <div className="flex justify-end gap-2">
                     <Button onClick={onCancel} severity="plain">Cancel</Button>
-                    <Button type="submit">Save</Button>
+                    <Button type="submit" disabled={!name || !description || !author}>Save</Button>
                 </div>
             </form>
         </div>

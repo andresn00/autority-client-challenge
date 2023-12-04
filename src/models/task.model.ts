@@ -10,4 +10,3 @@ export type Task = {
 }
 
 export type CreateTask = Omit<Task, 'id' | 'createdAt' | 'updatedAt' | 'deletedAt'>
-export type UpdateTask = Omit<Task, 'createdAt' | 'updatedAt' | 'deletedAt'>

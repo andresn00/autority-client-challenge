@@ -5,10 +5,11 @@ import { FaEllipsisVertical, FaRegTrashCan } from "react-icons/fa6";
 
 type Props = {
     task: Task,
-    onDelete: () => void
+    onDelete: () => void,
+    onTaskClick: () => void,
 }
 
-export const TaskItem = ({ task, onDelete }: Props) => {
+export const TaskItem = ({ task, onDelete, onTaskClick }: Props) => {
     const [isComplete, setIsComplete] = useState<boolean>(task.isComplete)
     const [showDeleteBtn, setShowDeleteBtn] = useState<boolean>(false)
 
@@ -23,7 +24,7 @@ export const TaskItem = ({ task, onDelete }: Props) => {
                     <input type='checkbox' checked={isComplete} onChange={onIsCompleteChange}
                         className='w-5 h-5' />
                 </div>
-                <div className='flex-1 p-4' onClick={() => setShowDeleteBtn(false)}>
+                <div className='flex-1 p-4' onClick={onTaskClick}>
                     <p className='text-lg font-bold'>
                         <span className={isComplete ? 'line-through text-slate-600' : ''}>{task.name}</span>
                         <span className='ml-2 text-slate-700 text-sm'>({task.author})</span>

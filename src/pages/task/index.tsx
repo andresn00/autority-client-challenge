@@ -1,8 +1,8 @@
 import { NextPage } from "next";
-import TaskForm from "../features/task/task-form/TaskForm";
-import { CreateTask } from "../models/task.model";
+import TaskForm from "../../features/task/task-form/TaskForm";
+import { CreateTask } from "../../models/task.model";
 import { useRouter } from "next/router";
-import { createTask } from "../features/task/TaskAPI";
+import { createTask } from "../../features/task/TaskAPI";
 
 const NewTaskPage: NextPage = () => {
     const router = useRouter()

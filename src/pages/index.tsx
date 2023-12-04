@@ -10,9 +10,13 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Button } from '../shared/button/Button'
 import ConfirmationModal from '../shared/confirmation-modal/ConfirmationModal'
+import { useRouter } from 'next/router'
+import { url } from 'inspector'
 
 
 const IndexPage: NextPage = () => {
+  const router = useRouter()
+  
   const [tasks, setTasks] = useState<Task[]>([])
   const [confirmationModalOpen, setConfirmationModalOpen] = useState<boolean>(false)
   const [taskToDeleteId, setTaskToDeleteId] = useState<number | null>(null)
@@ -44,6 +48,11 @@ const IndexPage: NextPage = () => {
       setTaskToDeleteId(null)
     })
   }
+
+  const onTaskClick = (id: number) => {
+    const url = '/task/[id]'
+    router.push({ pathname: url, query: { id } })
+  }
   
   return (
     <div className='p-4'>
@@ -56,7 +65,8 @@ const IndexPage: NextPage = () => {
             <Button>New task</Button>
           </Link>
         </div>
-        <TaskList tasks={tasks} onDeleteTask={onDeleteTask}></TaskList>
+        <TaskList tasks={tasks} onDeleteTask={onDeleteTask}
+          onTaskClick={onTaskClick} ></TaskList>
         <ConfirmationModal isOpen={confirmationModalOpen} onClose={(value) => handleCloseModal(value)}
           danger={true} title='Delete task'
           description='Are you sure you want to delete this task?' />
