@@ -25,3 +25,15 @@ export const deleteTask = async (id: number) => {
     const result = await response.json() as ResponseWrapper<Task>
     return result.data
 }
+
+export const createTask = async (task: CreateTask) => {
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(task)
+    })
+    const result = await response.json() as ResponseWrapper<Task>
+    return result.data
+}
